@@ -1,0 +1,21 @@
+name: Build
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: 1.18.x
+
+      - name: Generate wasm file
+      - run: |
+          GOARCH=wasm GOOS=js go build -o main.wasm main.go
+
