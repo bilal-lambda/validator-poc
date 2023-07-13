@@ -11,7 +11,7 @@ func Validate(source string) (bool, error) {
 	var yml models.SampleYamlStruct
 	err := yaml.Unmarshal([]byte(source), &yml)
 	if err != nil {
-		return false, fmt.Errorf("incorrect yaml - %s", err)
+		return false, fmt.Errorf("invalid yaml - %s", err)
 	}
 	
 	if yml.Runson != "linux" && yml.Runson != "macos" && yml.Runson != "win" {
