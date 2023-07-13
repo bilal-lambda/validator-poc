@@ -35,4 +35,4 @@ jobs:
           author_name: bilal-lambda
           author_email: bilalh@lambdatest.com
           message: 'sync main.wasm and index.html'
-          add: main.wasm
+          add: main.wasm index.html
