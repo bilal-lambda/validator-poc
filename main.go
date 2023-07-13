@@ -4,15 +4,8 @@ import (
 	"fmt"
 	"syscall/js"
 
-	"gopkg.in/yaml.v3"
+	"github.com/bilal-lambda/validator-poc/rules"
 )
-
-type SampleYamlStruct struct {
-	Version string `yaml:"version"`
-	Runson string `yaml:"runson"`
-	CodeDirectory string `yaml:"codeDirectory"`
-	TestSuites []string `yaml:"testSuites"`
-}
 
 func validateYaml(_this js.Value, args []js.Value) interface{} {
 	ok := js.ValueOf("ok")
@@ -22,23 +15,8 @@ func validateYaml(_this js.Value, args []js.Value) interface{} {
 	}
 
 	source := args[0].String()
-
-	var yml SampleYamlStruct
-	err := yaml.Unmarshal([]byte(source), &yml)
-	if err != nil {
-		return js.ValueOf(fmt.Sprintf("invalid yaml - %s", err))
-	}
-
-	if yml.Runson != "linux" && yml.Runson != "macos" && yml.Runson != "win" {
-		return js.ValueOf("runson can only be linux, macos or win")
-	}
-
-        if yml.Version == "" {
-    		return js.ValueOf("missing version")
-  	}
-
-	if yml.Version != "0.1" && yml.Version != "0.2" {
-		return js.ValueOf("incorrect version")
+	if _, err := rules.Validate(source); err != nil {
+		return js.ValueOf(err.Error())
 	}
 
 	return ok
