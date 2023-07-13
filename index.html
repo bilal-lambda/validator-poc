@@ -1,0 +1,42 @@
+<html> 
+   <head> 
+      <meta charset="utf-8"/>
+      <script src="wasm_exec.js"></script>
+      <style>
+      textarea {
+         display: block;
+      }
+      </style>
+   </head>
+   <body>
+      <script type="text/javascript"> 
+         const importObj = {
+            module: {} 
+         };
+         const go = new Go(); 
+         async function fetchAndInstantiate() { 
+            const response = await fetch("main.wasm"); 
+            const buffer = await response.arrayBuffer(); 
+            const obj = await WebAssembly.instantiate(buffer, go.importObject); 
+            console.log(obj); 
+            go.run(obj.instance); 
+         } 
+         fetchAndInstantiate();
+      </script>
+      <textarea rows=32 cols=64 id=yaml>
+version: "0.1"
+runson: win
+codeDirectory: code
+testSuites:
+  - npm run test
+</textarea>
+      <input type=button value=Validate id=validate />
+      <script>
+         document.getElementById('validate').addEventListener('click', function() {
+             let src = document.getElementById('yaml').value;
+             let result = validateYaml(src);
+             alert(result);
+         });
+      </script>
+   </body>
+</html>
