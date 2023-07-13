@@ -14,7 +14,7 @@ func validateYaml(_this js.Value, args []js.Value) interface{} {
 	}
 
 	source := args[0].String()
-	if _, err := rules.Validate(source); err != nil {
+	if err := rules.Validate(source); err != nil {
 		return js.ValueOf(err.Error())
 	}
 
