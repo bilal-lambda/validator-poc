@@ -2,29 +2,32 @@ package rules
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/bilal-lambda/validator-poc/models"
 	"gopkg.in/yaml.v3"
 )
 
-func Validate(source string) (bool, error) {
+func Validate(source string) error {
 	var yml models.SampleYamlStruct
-	err := yaml.Unmarshal([]byte(source), &yml)
+	decoder := yaml.NewDecoder(strings.NewReader(source))
+	decoder.KnownFields(true)
+	err := decoder.Decode(&yml)
 	if err != nil {
-		return false, fmt.Errorf("invalid yaml - %s", err)
+		return fmt.Errorf("invalid yaml - %s", err)
 	}
 	
 	if yml.Runson != "linux" && yml.Runson != "macos" && yml.Runson != "win" {
-		return false, fmt.Errorf("runson can only be linux, macos or win")
+		return fmt.Errorf("runson can only be linux, macos or win")
 	}
 
 	if yml.Version == "" {
-		return false, fmt.Errorf("missing version")
+		return fmt.Errorf("missing version")
 	}
 
 	if yml.Version != "0.1" && yml.Version != "0.2" {
-		return false, fmt.Errorf("incorrect version, use 0.1 or 0.2")
+		return fmt.Errorf("incorrect version, use 0.1 or 0.2")
 	}
 
-	return true, nil
+	return nil
 }
