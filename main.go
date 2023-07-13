@@ -33,9 +33,9 @@ func validateYaml(_this js.Value, args []js.Value) interface{} {
 		return js.ValueOf("runson can only be linux, macos or win")
 	}
 
-  if yml.Version == "" {
+        if yml.Version == "" {
     		return js.ValueOf("missing version")
-  }
+  	}
 
 	if yml.Version != "0.1" && yml.Version != "0.2" {
 		return js.ValueOf("incorrect version")
