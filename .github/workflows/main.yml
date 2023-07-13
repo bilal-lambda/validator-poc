@@ -19,3 +19,11 @@ jobs:
         run: |
           GOARCH=wasm GOOS=js go build -o main.wasm main.go
 
+      - name: Publish github pages
+        run: |
+          mv main.wasm main.wasm.new
+          git checkout gh-pages
+          mv main.wasm.new main.wasm
+          git add main.wasm
+          git commit -m "sync main.wasm"
+          git push origin gh-pages
