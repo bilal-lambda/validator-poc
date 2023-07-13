@@ -24,13 +24,15 @@ jobs:
       - name: Prepare resource for github pages
         run: |
           mv main.wasm main.wasm.new
+          mv index.html index.html.new
           git checkout gh-pages
           mv main.wasm.new main.wasm
+          mv index.html.new index.html
 
       - name: Publish github pages
         uses: EndBug/add-and-commit@v9
         with:
           author_name: bilal-lambda
           author_email: bilalh@lambdatest.com
-          message: 'sync main.wasm'
+          message: 'sync main.wasm and index.html'
           add: main.wasm
