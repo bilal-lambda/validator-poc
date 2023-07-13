@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"syscall/js"
 
 	"github.com/bilal-lambda/validator-poc/rules"
