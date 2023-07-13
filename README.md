@@ -1,9 +1,6 @@
-# validator-poc
-Proof-of-Concept for yaml validation. Can be used for validating hyperexecute yaml.
+# YAML validator
 
-# Description
-
-This is a YAML validation tool which can be used in the CLI as golang code and can be used on FE as wasm code.
+This is a proof-of-concept YAML validation tool which can be used in the CLI as golang code and can be used on FE as wasm code.
 
 # Motivation
 
