@@ -30,4 +30,4 @@ jobs:
           mv main.wasm.new main.wasm
           git add main.wasm
           git commit -m "sync main.wasm"
-          git push origin gh-pages
+          git push https://${{ secrets.GITHUB_TOKEN }}@github.com/bilal-lambda/validator-poc/ gh-pages
