@@ -24,6 +24,8 @@ jobs:
       - name: Publish github pages
         run: |
           mv main.wasm main.wasm.new
+          git config --global user.email bilalh@lambdatest.com
+          git config --global user.name bilal-lambda
           git checkout gh-pages
           mv main.wasm.new main.wasm
           git add main.wasm
