@@ -23,7 +23,7 @@
          } 
          fetchAndInstantiate();
       </script>
-      <textarea rows=32 cols=64 id=yaml>
+      <textarea rows=32 cols=64 id=yaml autofocus>
 version: "0.1"
 runson: win
 codeDirectory: code
@@ -31,6 +31,7 @@ testSuites:
   - npm run test
 </textarea>
       <input type=button value=Validate id=validate />
+      <p><a href="https://github.com/bilal-lambda/validator-poc/blob/main/rules/rules.go">Rules</a></p>
       <script>
          document.getElementById('validate').addEventListener('click', function() {
              let src = document.getElementById('yaml').value;
